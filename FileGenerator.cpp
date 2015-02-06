@@ -6,8 +6,8 @@
 using namespace std;
 
 
-void filemaker(string [],int); //used to make the file
-string randStr(); //out puts a random string from 4-7 characters in length
+void filemaker(string [],long long, long long, long long); //used to make the file
+string randStr(long long, long long); //out puts a random string from 4-7 characters in length
 string getfilename(); //creates a string ending in .txt
 
 
@@ -19,9 +19,16 @@ int main()
 					"stacy","tumath","ulrich","vicki","wieger","xavier","yeah","zaiah"};
 	while(true){
 		cout<<"Number of lines: ";
-		unsigned long long S;
+		unsigned long long S,min,max;
 		cin>>S;
-		filemaker(repeat,S);
+		cout<<"\nMin Char per line: ";
+		cin>>min;
+		cout<<"\nMax Char per line: ";
+		cin>>max;
+		for(int i=0; i<26; i++){
+			repeat[i]=randStr(min,max);
+		}
+		filemaker(repeat,S,min,max);
 	}
 	return 0;	
 }
@@ -34,7 +41,7 @@ string getfilename(){
 	return res;
 }
 
-void filemaker(string repeat[], int S){
+void filemaker(string repeat[], long long S, long long min, long long max){
 	ofstream out;
 	out.open(getfilename().c_str());
 	int c,d;
@@ -47,7 +54,7 @@ void filemaker(string repeat[], int S){
 				out<<repeat[d]<<endl;
 				break;
 			case 1:
-				out<<randStr()<<endl;
+				out<<randStr(min,max)<<endl;
 				break;
 			default:;
 		}
@@ -55,9 +62,9 @@ void filemaker(string repeat[], int S){
 	out.close();	
 }
 
-string randStr(){
+string randStr(long long min, long long max){
 	string res="";
-	int l=rand()%4+4;
+	int l=rand()%(max-min+1)+min;
 	while(res.length()<l) res+=((char)((rand()%26+(int)'a')));
 	return res;
 }
