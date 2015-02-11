@@ -5,9 +5,10 @@
 #include <fstream>
 using namespace std;
 
+typedef unsigned long long ll;
 
-void filemaker(string [],long long, long long, long long,int,int,int); //used to make the file
-string randStr(long long, long long); //out puts a random string from 4-7 characters in length
+void filemaker(string [],ll, ll, ll,int,int,int); //used to make the file
+string randStr(ll, ll); //out puts a random string from 4-7 characters in length
 string getfilename(); //creates a string ending in .txt
 
 
@@ -17,7 +18,7 @@ int main()
 	string * repeat;
 	while(true){
 		cout<<"Number of lines: ";
-		unsigned long long S,min,max;
+		ll S,min,max;
 		int denom, num,n;
 		cin>>S;
 		cout<<"\nMin Char per line: ";
@@ -47,11 +48,11 @@ string getfilename(){
 	return res;
 }
 
-void filemaker(string repeat[], long long S, long long min, long long max,int denom,int num,int n){
+void filemaker(string repeat[], ll S, ll min, ll max,int denom,int num,int n){
 	ofstream out;
 	out.open(getfilename().c_str());
 	int c,d;
-	for(unsigned long long i=0; i<S; i++){
+	for(ll i=0; i<S; i++){
 		c=rand()%denom;
 		c/=num; //1 out of twelve that randStr() will be called
 		switch(c){
@@ -68,7 +69,7 @@ void filemaker(string repeat[], long long S, long long min, long long max,int de
 	out.close();	
 }
 
-string randStr(long long min, long long max){
+string randStr(ll min, ll max){
 	string res="";
 	int l=rand()%(max-min+1)+min;
 	while(res.length()<l) res+=((char)((rand()%26+(int)'a')));
